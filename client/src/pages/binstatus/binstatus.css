@@ -1,0 +1,14 @@
+.bindiv{
+    text-align: left;
+    position: absolute;
+    left:10%;
+top: 30%;
+}
+
+.subdiv{
+    padding: 60px;
+    width: 800px;
+    border: 1px solid green;
+    border-radius: 10px;
+    text-align: left; 
+}

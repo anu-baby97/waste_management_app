@@ -1,0 +1,22 @@
+/* Header Styles */
+
+
+.nav-item{
+  
+  padding: 20px;
+  font-weight: 700;
+  font-size: 20px;
+  text-decoration: none;
+}
+.nav-item a{
+  color: green;
+  text-decoration: none;
+
+}
+
+
+
+.top-header-area {
+  background-color: black;
+  
+}

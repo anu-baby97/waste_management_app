@@ -1,0 +1,20 @@
+.logdiv{
+    padding-left: 30%;
+    padding-right:30% ;
+    padding-top: 5%;
+}
+
+#formdiv{
+   background-color:green;
+    border-radius: 15px;
+    padding:0% 20% 5% 20%;
+
+}
+
+.log-button{
+    background-color: teal;
+    padding: 10px 20px;
+    border-radius: 10px;
+    border:1px solid transparent;
+    color: white;
+}

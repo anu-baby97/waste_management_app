@@ -13,7 +13,7 @@ function Content() {
                 <h5>6747568435</h5>
                 <h5>Food</h5>
                 <h5>Medium</h5>
-                <Link to="/"><button type="button" class="btn btn-success" style={{width:"100px",float:"left"}}>Status</button></Link>
+                <Link to="/bin-status"><button type="button" class="btn btn-success" style={{width:"100px",float:"left", backgroundColor:"#6ECB63"}}>Status</button></Link>
             </div>
            
 

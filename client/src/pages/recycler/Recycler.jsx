@@ -1,9 +1,16 @@
-import React from 'react'
+import React, { Component } from 'react'
 import Content from '../../components/content/Content'
 import {Link} from "react-router-dom"
 import logo from '../../components/images/logo.png'
 
-function Recycler() {
+class Recycler extends Component {
+    constructor(props){
+        super(props);
+        this.state={
+            
+        }
+    }
+   render(){
     return (
         <div>
             <div className="navdiv">
@@ -34,6 +41,7 @@ function Recycler() {
             <Content/>
         </div>
     )
+   }
 }
 
 export default Recycler

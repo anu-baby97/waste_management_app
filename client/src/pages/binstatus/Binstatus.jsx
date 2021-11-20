@@ -1,7 +1,8 @@
-import React from 'react'
+import React, { Component } from 'react'
 import Volnav from '../../components/volnav/Volnav'
 import "./binstatus.css"
-function Binstatus() {
+class Binstatus extends Component {
+   render(){
     return (
         <div>
             <Volnav/>
@@ -14,6 +15,7 @@ function Binstatus() {
             </div>
         </div>
     )
+   }
 }
 
 export default Binstatus

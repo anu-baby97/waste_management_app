@@ -1,22 +1,39 @@
 /* Header Styles */
-
+@import url('https://fonts.googleapis.com/css2?family=Nunito&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Nunito&family=Open+Sans:wght@500&display=swap');
+.navdiv{
+  margin: 0;
+  padding: 0;
+  
+}
 
 .nav-item{
   
-  padding: 20px;
-  font-weight: 700;
-  font-size: 20px;
-  text-decoration: none;
-}
-.nav-item a{
-  color: green;
-  text-decoration: none;
+    padding: 20px 30px;
+    font-weight: 700;
+    font-size: 18px;
+    text-decoration: none;
+  }
+  .nav-item:hover{
+    background-color: #94938d;
+      
+    }
+  .nav-item a{
+    color: #B1E693;
+    text-decoration: none;
+    font-family: 'Nunito', sans-serif;  
+  }
+nav{
+    background-color: #0009;
 
-}
-
-
-
-.top-header-area {
-  background-color: black;
+  }
+ .top-header-area {
   
-}
+  width: 100%;
+    margin: 0 auto;
+    background-image: url(../../components/images/bg1.jpg);
+    
+
+    
+  }
+  

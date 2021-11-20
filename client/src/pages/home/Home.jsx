@@ -9,26 +9,21 @@ function Home() {
     return (
         <div>
             <Navbar />
-            <div class="hero-area hero-bg" style={{ backgroundImage: `url(${bg})` }}>
-                <div class="container">
-                    <div class="row">
-                        <div class="col-lg-9 offset-lg-2 text-center">
-                            <div class="hero-text">
-                                <div class="hero-text-tablecell">
-                                    <h1 class="subtitle">Metal and Non-Metal</h1>
-                                    <h1 style={{ color: "green", fontSize:"50px", fontWeight:"900" }}>GO Green</h1>
-                                    <h1> Smart Waste Management </h1>
-                                    <div class="hero-btns">
-                                        <a href="shop.html" class="boxed-btn">Disposal</a>
-                                        <a href="contact.html" class="boxed-btn">Recycling</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+            <div class="hero-area hero-bg pl-5" >
+
+                <div class="hero-text text-left">
+                    <div class="hero-text-tablecell">
+                        <h1 style={{width:"50%",fontSize:"60px"}} >Providing the industry-leading solutions you need.</h1><br />
+                        <h3 style={{width:"50%",color:"green",fontWeight:"bolder",backgroundColor:"beige",opacity:"0.7",boxShadow:" rgba(0, 0, 0, 0.56) 0px 22px 70px 4px"}}>Our reliable services protect the environment while allowing your home or business to run like clockwork.</h3>
+
+                        {/* <div class="hero-btns">
+                            <a href="shop.html" class="boxed-btn">Disposal</a>
+                            <a href="contact.html" class="boxed-btn">Recycling</a>
+                        </div> */}
                     </div>
                 </div>
             </div>
-        </div>
+            </div>
     )
 }
 

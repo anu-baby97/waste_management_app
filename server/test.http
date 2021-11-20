@@ -1,0 +1,8 @@
+POST http://localhost:3000/reg/registerdata
+Content-Type: application/json
+
+{
+    "name":"anu",
+    "address":"Calicut",
+    "phno":"457846587"
+}

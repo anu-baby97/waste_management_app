@@ -1,5 +1,10 @@
 /* Header Styles */
 
+.navdiv{
+  margin: 0;
+  padding: 0;
+
+}
 
 .nav-item{
   
@@ -8,15 +13,26 @@
     font-size: 20px;
     text-decoration: none;
   }
+  .nav-item:hover{
+  background-color: #94938d;
+    
+  }
   .nav-item a{
-    color: green;
+    color: #B1E693;
     text-decoration: none;
   
   }
-  
+nav{
+    background-color: #0009;
+
+  }
  .top-header-area {
-    background-color: #051922;
-    width: 100%;
+  
+  width: 100%;
+    margin: 0 auto;
+    background-image: url(../../components/images/bg1.jpg);
+    
+
     
   }
   

@@ -1,6 +1,8 @@
 import React from 'react'
 import { Link } from "react-router-dom"
 import logo from '../../components/images/logo.png'
+import logo1 from "../../components/images/logo1.jpg"
+
 
 function Volnav() {
     return (
@@ -8,7 +10,7 @@ function Volnav() {
              <div className="navdiv">
                 <div className="top-header-area" id="sticker">
                     <nav class="navbar navbar-expand-md">
-                        <a class="navbar-brand ml-3 pl-5" href="#"><img src={logo} alt="image" className="rounded-circle" width="60px" height="60px" /></a>
+                        <a class="navbar-brand ml-3 pl-5" href="/" style={{color:"#B1E693",fontSize:"25px",fontWeight:"700"}}><img src={logo1} alt="image" className="rounded-circle mr-2" width="50px" height="50px" />GOGREEN</a>
                         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav">
                             <span class="navbar-toggler-icon"></span>
                         </button>

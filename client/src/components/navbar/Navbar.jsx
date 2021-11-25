@@ -15,19 +15,20 @@ function Navbar() {
                     </button>
                     <div class="collapse navbar-collapse" id="navbarNav">
                         <ul class="navbar-nav mr-auto">
-                            <a href="/" style={{ textDecoration: "none" }}> <li class="nav-item">
+                            <a href="/" style={{ textDecoration: "none" }}> <li class="nav-item" id="mainnavitem">
                                 <Link to="/">HOME</Link>
                             </li></a>
-                            <a href="/" style={{ textDecoration: "none" }}> <li class="nav-item">
+                            <a href="/" style={{ textDecoration: "none" }}> <li class="nav-item" id="mainnavitem">
                                 <Link to="">ABOUT</Link>  </li></a>
-                            <a href="/" style={{ textDecoration: "none" }}>  <li class="nav-item">
+                            <a href="/" style={{ textDecoration: "none" }}>  <li class="nav-item" id="mainnavitem">
                                 <Link to="">OUR SERVICES</Link>  </li></a>
                         </ul>
                         <ul class="navbar-nav">
-                            <a href="/login" style={{ textDecoration: "none" }}>  <li class="nav-item">
+                            <a href="/login" style={{ textDecoration: "none" }}>  <li class="nav-item" id="mainnavitem">
                                 <Link to="/login">LOGIN</Link>  </li></a>
-                            <a href="/register" style={{ textDecoration: "none" }}> <li class="nav-item mr-5 pr-5">
+                            <a href="/register" style={{ textDecoration: "none" }}> <li class="nav-item mr-5 pr-5" id="mainnavitem">
                                 <Link to="/register">REGISTER</Link>  </li></a>
+                              
                         </ul>
                     </div>
                 </nav>

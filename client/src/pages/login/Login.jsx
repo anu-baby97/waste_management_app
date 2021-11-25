@@ -33,7 +33,9 @@ class Login extends Component {
         userData.password = event.target.value;
         this.setState({ userData: userData })
     }
-    handleLogin() {
+    handleLogin(e) {
+        e.preventDefault();
+
         if (this.state.userData.username == null) {
             toast.warning("Please fill your name", { autoClose: 2000 })
         }
@@ -58,26 +60,27 @@ class Login extends Component {
                 console.log(response);
                 if (response.data.success === true) {
                     this.setState({
+                        result_message: response.data.message,
                         data: {
                             role: response.data.userRole,
-                            login_id: response.data.loginId,
-                            token: response.data.token
+                            login_id: response.data.loginId, //data from backend
+                            token: response.data.token,
+                            cname:response.data.name
                         }
                     })
                     console.log("data", this.state.data.login_id)
 
-                    if (this.state.data.role === 0) {
-                        this.props.history.push('/admin')
+                    if (this.state.data.role === 0) { 
+                        this.props.history.push('/admin-dashboard')
                         localStorage.setItem('logindata', JSON.stringify(this.state.data))
                         window.sessionStorage.setItem('isloggedin', true)
                     }
-                    else if (this.state.data.role === 1) {
+                    else if (this.state.data.role === 1) {//if role is 1 then redirect to user page
                         this.props.history.push('/volunteer')
                         localStorage.setItem('logindata', JSON.stringify(this.state.data))
                         window.sessionStorage.setItem('isloggedin', true)
                     }
                     else if (this.state.data.role === 2) {
-                        alert("User Logged in")
                         this.props.history.push('/user')
                         localStorage.setItem('logindata', JSON.stringify(this.state.data))
                         window.sessionStorage.setItem('isloggedin', true)
@@ -87,10 +90,11 @@ class Login extends Component {
                         localStorage.setItem('logindata', JSON.stringify(this.state.data))
                         window.sessionStorage.setItem('isloggedin', true)
                     }
+
                 }
                 else {
+                    alert(this.state.result_message)
                     alert("Login Failed")
-                    toast("Login Failed", { autoClose: 2000 })
                 }
             })
                 .catch(function (err) {
@@ -104,9 +108,7 @@ class Login extends Component {
         }
 
     }
-    handlesubmit(e) {
-        e.preventDefault();
-    }
+   
     render() {
         return (
             <div>
@@ -118,7 +120,7 @@ class Login extends Component {
                             <div class="signup-content">
                                 <div class="signup-form">
                                     <h2 class="form-title">Sign up</h2>
-                                    <form class="register-form" id="register-form" onSubmit={this.handlesubmit.bind(this)}>
+                                    <form class="register-form" id="register-form" onSubmit={this.handleLogin.bind(this)}>
                                         <div class="form-group">
                                         <label><PersonIcon style={{fill:"#9CC094",fontSize:"27px"}}/></label>
                                             <input type="text" name="username" placeholder="Enter your User Name" style={{paddingLeft:"40px"}} value={this.state.userData.username} onChange={this.handleUname.bind(this)} />
@@ -133,7 +135,7 @@ class Login extends Component {
                                         <label for="agree-term" class="label-agree-term"><span><span></span></span>I agree all statements in  <a href="#" class="term-service">Terms of service</a></label>
                                     </div>
                                         <div class="form-group form-button">
-                                            <input type="submit" name="signup" id="signup" class="form-submit" value="Login" onClick={this.handleLogin.bind(this)} />
+                                            <input type="submit" name="signup" id="signup" class="form-submit" value="Login" />
                                         </div>
                                     </form>
                                 </div>

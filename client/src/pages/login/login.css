@@ -179,7 +179,8 @@ display-flex, .display-flex, .display-flex-center, .signup-content, .signin-cont
   
   .main {
     background: #f8f8f8;
-    padding: 150px 0; }
+    padding: 150px 0; 
+  }
   
   .clear {
     clear: both; }

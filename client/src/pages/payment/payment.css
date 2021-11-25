@@ -1,5 +1,8 @@
 .paydiv{
-    padding-left: 30%;
-    padding-right:30% ;
-    padding-top: 5%;
+    padding: 20px 90px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    margin: 5% 25%;
+    background-color:white;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }

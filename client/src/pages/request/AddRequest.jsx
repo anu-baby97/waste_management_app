@@ -6,17 +6,20 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import 'react-toastify/dist/ReactToastify.min.css';
 import axios from 'axios';
+import PersonIcon from '@material-ui/icons/Person';
+import LocalPhoneIcon from '@material-ui/icons/LocalPhone';
+import img3 from "../../components/images/bg2.jpg"
 
 class AddRequest extends Component {
-    constructor(props){
+    constructor(props) {
         super(props);
-        this.state={
+        this.state = {
             userDataReg:
             {
                 name: props.name,
-                phno: props.phno,
-                waste: props.waste,
-                quantity:props.quantity
+                phone: props.phone,
+                type: props.type,
+                quantity: props.quantity
             }
         }
     }
@@ -27,7 +30,7 @@ class AddRequest extends Component {
     }
     handlePhoneChanged(event) {
         var userDataReg = this.state.userDataReg;
-        userDataReg.phno = event.target.value;
+        userDataReg.phone = event.target.value;
         this.setState({ userDataReg: userDataReg })
     }
     handleNameChanged(event) {
@@ -35,94 +38,114 @@ class AddRequest extends Component {
         userDataReg.name = event.target.value;
         this.setState({ userDataReg: userDataReg })
     }
-    handleWasteChanged(event) {
+    handleTypeChanged(event) {
         var userDataReg = this.state.userDataReg;
-        userDataReg.waste = event.target.value;
+        userDataReg.type = event.target.value;
         this.setState({ userDataReg: userDataReg })
     }
-   handleButtonClicked(){
-    if (this.state.userDataReg.name == null) {
-        toast.warning("Please fill your name", { autoClose: 5000, theme: "dark" })
-    }
-    
-    else if (this.state.userDataReg.phno == null) {
-        toast.warning("Please fill your phone number", { autoClose: 5000 })
-    }
-    else if (this.state.userDataReg.waste == null) {
-        toast.warning("Please fill the waste type", { autoClose: 5000 })
-    }
-    else if (this.state.userDataReg.quantity == null) {
-        toast.warning("Please fill the quantity of waste", { autoClose: 5000 })
-    }
-    
-    else {
-        console.log(this.state.userDataReg.name);
-        console.log(this.state.userDataReg.phno);
-        console.log(this.state.userDataReg.waste);
-        console.log(this.state.userDataReg.quantity);
+    handleButtonClicked(e) {
+        e.preventDefault();
 
-        const url = "http://localhost:4000/request/requestdata"
-        const data = {
-            name: this.state.userDataReg.name,
-            phno: this.state.userDataReg.phno,
-            waste: this.state.userDataReg.waste,
-            quantity: this.state.userDataReg.quantity,
+        if (this.state.userDataReg.name == null) {
+            toast.warning("Please fill your name", { autoClose: 5000, theme: "dark" })
         }
-        const header = {
-            'Content-Type': 'application/json',
 
+        else if (this.state.userDataReg.phone == null) {
+            toast.warning("Please fill your phone number", { autoClose: 5000 })
         }
-        axios.post(url, data, header).then((response) => {
-            console.log(response);
-            if (response.data.success === true) {
-                this.setState({
-                    result_message: response.data.message
-                })
-                alert(this.state.result_message)
-                this.props.history.push('/user')
-            }
-            else {
-                alert("Add Request Failed")
-            }
-        })
-            .catch(function (err) {
-                console.log(err)
+        else if (this.state.userDataReg.type == null) {
+            toast.warning("Please fill the waste type", { autoClose: 5000 })
+        }
+        else if (this.state.userDataReg.quantity == null) {
+            toast.warning("Please fill the quantity of type", { autoClose: 5000 })
+        }
+
+        else {
+            console.log(this.state.userDataReg.name);
+            console.log(this.state.userDataReg.phone);
+            console.log(this.state.userDataReg.type);
+            console.log(this.state.userDataReg.quantity);
+
+            this.props.history.push({
+                pathname:'/payment',
+                state:{
+                    type:this.state.userDataReg.type,
+                    quantity:this.state.userDataReg.quantity
+                }
             })
 
-    }
-}
+            }
+           
+           
+              
+        }
+    
 
-   render(){
-    return (
-        <div>
-            <Usernav />
-            <div className="reqdiv">
-                <br />
-                <form action="" className="ui form pt-5" id="form-div">
 
-                    Name:
-                    <input type="text" name="name" className="ui input mb-3" value={this.state.userDataReg.name} onChange={this.handleNameChanged.bind(this)}/>
+    render() {
+        return (
+            <div>
+                <Usernav />
+                <div class="main">
 
-                    Phone Number: <input type="number" name="phno" className="ui input mb-3 " value={this.state.userDataReg.phno} onChange={this.handlePhoneChanged.bind(this)} />
-                    <select name="waste" id="type" className="mt-4" value={this.state.userDataReg.waste} onChange={this.handleWasteChanged.bind(this)}>
-                        <option value="types">Choose Waste Type:</option>
-                        <option value="Metal">Metal</option>
-                        <option value="Paper">Paper</option>
-                        <option value="Food">Food</option>
-                        <option value="Plastic">Plastic</option>
-                    </select>
-                    <select name="quantity" id="quantity" className="mt-4 " value={this.state.userDataReg.quantity} onChange={this.handleQuantityChanged.bind(this)}>
-                        <option value="quantities">Choose Quantity Type:</option>
-                        <option value="low">Low</option>
-                        <option value="medium">Medium</option>
-                        <option value="high">High</option>
-                    </select>
-                    <div className="mt-3 pt-1 text-center"><br /><Link to="/payment"><button className="log-button" onClick={this.handleButtonClicked.bind(this)}>Add Request</button></Link></div>
-                </form>
+                    <section class="signup">
+                        <div class="container">
+                            <div class="signup-content">
+                                <div class="signup-form">
+                                    <h2 class="form-title">Add your Request Here</h2>
+                                    <form class="register-form" id="register-form" onSubmit={this.handleButtonClicked.bind(this)}>
+                                        <div class="form-group">
+                                            <label><PersonIcon style={{ fill: "#9CC094", fontSize: "27px" }} /></label>
+                                            <input type="text" name="name" placeholder="Enter your Name" style={{ paddingLeft: "40px" }} value={this.state.userDataReg.name} onChange={this.handleNameChanged.bind(this)} />
+                                        </div>
+                                        <div class="form-group">
+                                            <label><LocalPhoneIcon style={{ fill: "#9CC094", fontSize: "27px" }} /></label>
+
+                                            <input type="number" name="phone" placeholder="Enter your Phone Number" value={this.state.userDataReg.phone} onChange={this.handlePhoneChanged.bind(this)} />
+                                        </div>
+                                        <div class="drop">
+                                            <div class="select-box">
+                                                <select name="type" id="type" className="mt-4" value={this.state.userDataReg.type} onChange={this.handleTypeChanged.bind(this)}>
+                                                    <option value="types">Choose Waste Type:</option>
+                                                    <option value="Metal">Metal</option>
+                                                    <option value="Paper">Paper</option>
+                                                    <option value="Food">Food</option>
+                                                    <option value="Plastic">Plastic</option>
+                                                </select>
+                                            </div>
+
+                                        </div>
+
+                                        <div class="drop">
+                                            <div class="select-box">
+
+                                                <select name="quantity" id="quantity" className="mt-4 " value={this.state.userDataReg.quantity} onChange={this.handleQuantityChanged.bind(this)}>
+                                                    <option value="quantities">Choose Quantity Type:</option>
+                                                    <option value="low">Low</option>
+                                                    <option value="medium">Medium</option>
+                                                    <option value="high">High</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="checkbox" name="agree-term" id="agree-term" class="agree-term" />
+                                            <label for="agree-term" class="label-agree-term"><span><span></span></span>I agree all statements in  <a href="#" class="term-service">Terms of service</a></label>
+                                        </div>
+                                        <div class="form-group form-button">
+                                              <input type="submit" name="signup" id="signup" class="form-submit" value="Add Request"  />
+                                        </div>
+                                    </form>
+                                </div>
+                                <div class="signup-image">
+                                    <figure><img src={img3} alt="sign up" /></figure>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
             </div>
-        </div>
-    )
-   }
+        )
+    }
 }
 
 export default AddRequest

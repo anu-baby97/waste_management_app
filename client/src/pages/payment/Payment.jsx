@@ -15,8 +15,11 @@ class Payment extends Component {
                 cardnumber: props.name,
                 expirydate: props.address,
                 cvv: props.cvv,
-                holdername:props.holdername
-            }
+                holdername: props.holdername,
+                amount:props.amount
+
+            },
+
         }
     }
     handleHolderName(event) {
@@ -39,9 +42,11 @@ class Payment extends Component {
         userDataReg.cardnumber = event.target.value;
         this.setState({ userDataReg: userDataReg })
     }
-   
-   
-    handleSubmit() {
+
+
+    handleButtonClicked(e) {
+        e.preventDefault()
+
         if (this.state.userDataReg.cardnumber == null) {
             toast.warning("Please fill your name", { autoClose: 5000, theme: "dark" })
         }
@@ -54,60 +59,106 @@ class Payment extends Component {
         else if (this.state.userDataReg.holdername == null) {
             toast.warning("Please fill your user name", { autoClose: 5000 })
         }
-       
+
         else {
             console.log(this.state.userDataReg.holdername);
             console.log(this.state.userDataReg.cvv);
             console.log(this.state.userDataReg.cardnumber);
             console.log(this.state.userDataReg.expirydate);
-           
 
-            const url = "http://localhost:4000/register/registerdata"
-            const data = {
-                cardnumber: this.state.userDataReg.holdername,
-                expirydate: this.state.userDataReg.cvv,
-                cvv: this.state.userDataReg.cardnumber,
-                holdername: this.state.userDataReg.expirydate,
+            const params={
+                type:this.props.location.state.type,
+                quantity:this.props.location.state.quantity,
+                amount:this.state.amount
             }
-            const header = {
-                'Content-Type': 'application/json',
-
+            const  headers={
+                'Content-Type':'application/json',
+                'Authorization':'Bearer '+ this.state.token
             }
-
-            console.log("data--",data)
-            axios.post(url, data, header).then((response) => {
-                console.log(response);
-                if (response.data.success === true) {
+            console.log("params--",params)
+            // fetch('http://localhost:4000/waste/add',{
+            //     method:'POST',
+            //     body:JSON.stringify(params),
+            //     headers:{
+            //         'Content-Type':'application/json',
+            //         'Authorization':'Bearer '+ this.state.token
+            //     },
+            // })
+            axios.post('http://localhost:4000/waste/add',params,headers)
+            .then(res=> res.json())
+            .then((data)=>
+            {
+                console.log("Result---",data);
+                
+                if(data.success==true){
                     this.setState({
-                        result_message: response.data.message
+                        message:data.message
+                        
                     })
-                    alert(this.state.result_message)
-                    this.props.history.push('/')
+                    alert(this.state.message)
+                    this.props.history.push('/user')
                 }
-                else {
-                    alert("Payment Failed")
+                else{
+                    alert("Payment Not Completed")
                 }
-            })
-                .catch(function (err) {
-                    console.log(err)
-                })
+            }); 
 
         }
     }
-    render(){
+
+    componentDidMount(){
+        const documentdata=JSON.parse(localStorage.getItem('logindata'))
+        const sessiondata=window.sessionStorage.getItem('isloggedin')
+        console.log("Login data---",documentdata)
+        console.log("Session data---",sessiondata)
+        this.setState({
+            token:documentdata.token
+        })
+        console.log("waste type---",this.props.location.state.type)
+        console.log("quantity type---",this.props.location.state.quantity)
+
+        if(this.props.location.state.quantity==="low"){
+            this.setState({
+                amount:"30"
+            })
+        }
+        else if(this.props.location.state.quantity==="medium"){
+            this.setState({
+                amount:"60"
+            })
+        }
+        else if(this.props.location.state.quantity==="high"){
+            this.setState({
+                amount:"100"
+            })
+        }
+
+    }
+
+
+
+   
+    render() {
         return (
             <div className="paydiv">
-                <form action="" className="ui form pt-5" id="form" >
-    
-                    Enter Card Number:
-                    <input type="number" className="ui input mb-3" value={this.state.userDataReg.cardnumber} onChange={this.handleCardNumber.bind(this)}/>
-    
-                    Expiry Date: <input type="date" className="ui input mb-3 " value={this.state.userDataReg.expirydate} onChange={this.handleExpiryDate.bind(this)} />
-                    CVV: <input type="number" className="ui input mb-3 " value={this.state.userDataReg.cvv} onChange={this.handleCvv.bind(this)} />
-                    Card Holder Name: <input type="text" className="ui input mb-3 " value={this.state.userDataReg.holdername} onChange={this.handleHolderName.bind(this)}  />
-    
+                <form action="" className="ui form pt-5" id="form" onSubmit={this.handleButtonClicked.bind(this)}  >
+
+                    Card Number:
+                    <input type="number" className="ui input mb-3" placeholder="Enter Card Number" value={this.state.userDataReg.cardnumber} onChange={this.handleCardNumber.bind(this)} />
                     
-                    <div className="text-center"><br /><Link to="/"><button className="log-button" onClick={this.state.props.handleSubmit.bind(this)}>Submit</button></Link></div>
+                    Card Holder Name: <input type="text" className="ui input mb-3 " placeholder="Enter Name on Card" value={this.state.userDataReg.holdername} onChange={this.handleHolderName.bind(this)} />
+                    <div style={{ float: "left", display: "block" }} >
+                    
+                    CVV: <br /> <input type="number" className="ui input mb-3 " placeholder="Enter CVV" style={{ width: "100%" }} value={this.state.userDataReg.cvv} onChange={this.handleCvv.bind(this)} />
+                    </div>
+                    <div style={{ float: "left", display: "block", marginLeft: "83px" }}>
+                    
+                    Expiry Date: <br /> <input type="date" className="ui input mb-3 " style={{ width: "100%" }} value={this.state.userDataReg.expirydate} onChange={this.handleExpiryDate.bind(this)} />
+                    </div>
+                    Amount: <input type="text" value={this.state.amount} readOnly />
+
+
+                    <div className="text-center mt-5 pt-5"><br /><button type="submit" className="btn btn-success">Submit</button></div>
                 </form>
             </div>
         )

@@ -5,7 +5,12 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import 'react-toastify/dist/ReactToastify.min.css';
 import axios from 'axios';
-import { useNavigate } from "react-router-dom"
+import img2 from "../../components/images/signup-image.jpg"
+import PersonIcon from '@material-ui/icons/Person';
+import HomeIcon from '@material-ui/icons/Home';
+import LocalPhoneIcon from '@material-ui/icons/LocalPhone';
+import LockIcon from '@material-ui/icons/Lock';
+import AccessibilityIcon from '@material-ui/icons/Accessibility';
 
 toast.configure();
 class Register extends Component {
@@ -53,8 +58,11 @@ class Register extends Component {
         userDataReg.role = event.target.value;
         this.setState({ userDataReg: userDataReg })
     }
-   
-    handleRegister() {
+
+    handleRegister(e) {
+        e.preventDefault();
+
+        var pattern = new RegExp(/^[0-9\b]+$/);
         if (this.state.userDataReg.name == null) {
             toast.warning("Please fill your name", { autoClose: 2000, theme: "dark" })
         }
@@ -64,17 +72,33 @@ class Register extends Component {
         else if (this.state.userDataReg.phone == null) {
             toast.warning("Please fill your phone number", { autoClose: 2000 })
         }
+        else if(!pattern.test(this.state.userDataReg.phone)){
+            toast.warning("Please enter a valid phone number", { autoClose: 2000 })
+
+        }
+        else if((this.state.userDataReg.phone.length) !=10){
+            toast.warning("Please enter a 10 digit phone number", { autoClose: 2000 })
+
+        }
         else if (this.state.userDataReg.username == null) {
             toast.warning("Please fill your user name", { autoClose: 2000 })
         }
+        else if((this.state.userDataReg.username.length)<3){
+            toast.warning("Username should have atleast 3 characters", { autoClose: 2000 })
+
+        }
         else if (this.state.userDataReg.password == null) {
             toast.warning("Please fill your password", { autoClose: 2000 })
+        }
+        else if((this.state.userDataReg.password.length)<5){
+            toast.warning("Password should have atleast 5 characters", { autoClose: 2000 })
+
         }
         else if (this.state.userDataReg.role == null) {
             toast.warning("Please select your role", { autoClose: 2000 })
         }
         else {
-            toast("Registered",{ autoClose: 2000 })
+            
             console.log(this.state.userDataReg.name);
             console.log(this.state.userDataReg.address);
             console.log(this.state.userDataReg.phone);
@@ -96,8 +120,8 @@ class Register extends Component {
 
             }
 
-            console.log("data--",data)
-            axios.post(url, data, header).then((response) => {
+            console.log("data--", data)
+            axios.post(url, data, header).then((response) => {//data posted to DB and then redirect to login page
                 console.log(response);
                 if (response.data.success === true) {
                     this.setState({
@@ -107,7 +131,7 @@ class Register extends Component {
                     this.props.history.push('/login')
                 }
                 else {
-                    alert("Registration Failed")
+                    toast("Registration Failed", { autoClose: 2000 })
                 }
             })
                 .catch(function (err) {
@@ -116,14 +140,70 @@ class Register extends Component {
 
         }
     }
-    handlesubmit(e){
-        e.preventDefault();
-    }
-
+   
     render() {
         return (
             <div>
                 <Header />
+                <section class="sign-in mb-5 pb-5 mt-5 pt-5">
+                    <div class="container">
+                        <div class="signin-content">
+                            <div class="signin-image">
+                                <figure><img src={img2} alt="signup" /></figure>
+                                <a href="/register" class="signup-image-link">Create an account</a>
+                            </div>
+
+                            <div class="signin-form">
+                                <h2 class="form-title">Sign up</h2>
+                                <form class="register-form" id="login-form" onSubmit={this.handleRegister.bind(this)}>
+                                    <div class="form-group">
+                                        <label><PersonIcon style={{ fill: "#9CC094", fontSize: "27px" }} /></label>
+                                        <input type="text" name="name" placeholder="Enter your Name" style={{ paddingLeft: "40px" }} value={this.state.userDataReg.name} onChange={this.handleName.bind(this)} />
+                                    </div>
+                                    <div class="form-group">
+                                        <label><HomeIcon style={{ fill: "#9CC094", fontSize: "27px" }} /></label>
+                                        <input type="text" name="address" placeholder="Enter your Address" style={{ paddingLeft: "40px" }} value={this.state.userDataReg.address} onChange={this.handleAddress.bind(this)} />
+                                    </div>
+                                    <div class="form-group">
+                                        <label><LocalPhoneIcon style={{ fill: "#9CC094", fontSize: "27px" }} /></label>
+                                        <input type="number" name="phone" placeholder="Enter your Phone Number" style={{ paddingLeft: "40px" }} value={this.state.userDataReg.phone} onChange={this.handleNumber.bind(this)} />
+                                    </div>
+                                    <div class="form-group">
+                                        <label><AccessibilityIcon style={{ fill: "#9CC094", fontSize: "27px" }} /></label>
+                                        <input type="text" name="username" placeholder="Enter your User Name" style={{ paddingLeft: "40px" }} value={this.state.userDataReg.username} onChange={this.handleUname.bind(this)} />
+                                    </div>
+                                    <div class="form-group">
+                                        <label><LockIcon style={{ fill: "#9CC094", fontSize: "27px" }} /></label>
+
+                                        <input type="password" name="password" className="ui input mb-3" style={{ paddingLeft: "40px" }} placeholder="Enter your Password" value={this.state.userDataReg.password} onChange={this.handlePass.bind(this)} />
+                                    </div>
+                                    <div class="drop">
+                                        <div class="select-box">
+                                            <select name="role" id="role" className="mt-3 form-control form-group" style={{ paddingLeft: "40px" }} value={this.state.userDataReg.role} onChange={this.handleRole.bind(this)}>
+                                                <option selected>Choose your Role:</option>
+                                                <option value="1">Volunteer</option>
+                                                <option value="2">User</option>
+                                                <option value="3">Recycler</option>
+
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="checkbox" name="remember-me" id="remember-me" class="agree-term" />
+                                        <label for="remember-me" class="label-agree-term"><span><span></span></span>Remember me</label>
+                                    </div>
+                                    <div class="form-group form-button">
+                                        <input type="submit" name="signin" id="signin" class="form-submit" value="Register" />
+                                    </div>
+                                    <div style={{ fontWeight: "bold", fontSize: "15px" }}>Already Registered? <a className="text-danger" style={{ cursor: "pointer", fontSize: "20px" }} onClick={() => this.props.history.push('/login')}>Login</a></div>
+
+                                </form>
+                                
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                {/* <Header />
                 <div className="regdiv pb-5">
                     <br />
                     <form action="" className="ui form pt-5" id="formdiv" onSubmit={this.handlesubmit.bind(this)} >
@@ -152,7 +232,8 @@ class Register extends Component {
                     </form>
                     <ToastContainer />
 
-                </div>
+                </div> */}
+                <ToastContainer />
             </div>
 
         );

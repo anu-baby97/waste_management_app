@@ -1,8 +1,12 @@
 const express = require("express")
 
-const LoginRouter=require("./routes/LoginRouter")
 
+const LoginRouter=require("./routes/LoginRouter")
 const RegisterRouter=require("./routes/RegisterRouter")
+const WasteRouter=require("./routes/WasteRouter")
+const BinRouter=require("./routes/BinRouter")
+const VolunteerRouter=require("./routes/VolunteerRouter")
+
 
 const cors=require("cors")
 const app = express()
@@ -26,6 +30,9 @@ app.use(express.json())
 app.use(cors())
 app.use('/login',LoginRouter)
 app.use('/register',RegisterRouter)
+app.use('/waste',WasteRouter)
+app.use('/volunteer',VolunteerRouter)
+app.use('/bin',BinRouter)
 
 
 app.listen(4000, function () {

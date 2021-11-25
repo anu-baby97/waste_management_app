@@ -16,16 +16,16 @@ function Volnav() {
                         </button>
                         <div class="collapse navbar-collapse" id="navbarNav">
                             <ul class="navbar-nav mr-auto">
-                                <li class="nav-item">
-                                    <Link to="/bin-status">Bin Status</Link>
-                                </li>
+                            <a href="/bin-status" style={{ textDecoration: "none" }}> <li class="nav-item">
+                                    <Link to="/bin-status">BIN STATUS</Link>
+                                </li></a>
 
                             </ul>
                             <ul class="navbar-nav">
-                                <li class="nav-item">
-                                    <Link to="/login">Log out</Link>  </li>
+                            <a href="/" style={{ textDecoration: "none" }}>  <li class="nav-item">
+                                    <Link to="/login">LOG OUT</Link>  </li></a>
                                 <li class="nav-item mr-5 pr-5">
-                                    <Link to="/register">Volunteer:</Link>  </li>
+                                    <Link to="/register">VOLUNTEER:</Link>  </li>
                             </ul>
                         </div>
                     </nav>

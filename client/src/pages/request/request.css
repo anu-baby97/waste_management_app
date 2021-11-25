@@ -1,20 +1,23 @@
-.reqdiv{
-    padding-left: 30%;
-    padding-right:30% ;
-    padding-top: 5%;
+.drop .container{
+    max-width: 1000px;
+    margin: 0 auto;
 }
 
-#form-div{
-   background-color:teal;
-    border-radius: 15px;
-    padding:0% 20% 5% 20%;
+.drop .select-box{
+    width:285px
+}
+.drop .select-box:after{
 
 }
 
-.log-button{
-    background-color: black;
-    padding: 10px 20px;
-    border-radius: 10px;
-    border:1px solid transparent;
-    color: white;
+.drop  .select-box select{
+    height: 42px;
+    padding: 10px 15px;
+    line-height: 18px;
+    font-size: 16px;
+    width: 100%;
+    appearance: none;
+    border:1px solid #ccc;
+    border-radius: 8px;
+    -webkit-appearance:checkbox !important
 }

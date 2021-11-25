@@ -1,5 +1,5 @@
 var mongoose=require('mongoose')
-mongoose.connect('mongodb://localhost:27017/WasteManagementDB')
+mongoose.connect('mongodb+srv://Anu:LTCgaj379@librarydb.xu7w1.mongodb.net/Waste_Management_DB?retryWrites=true&w=majority')
 var schema=mongoose.Schema
 var binstatus_schema=new schema({
     bin_name:String,

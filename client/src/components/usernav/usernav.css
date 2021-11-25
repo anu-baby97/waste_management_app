@@ -6,14 +6,14 @@
 
 }
 
-.nav-item{
+#usernavitem{
   
     padding: 20px 30px;
     font-weight: 700;
     font-size: 20px;
     text-decoration: none;
   }
-  .nav-item:hover{
+#usernavitem:hover{
   background-color: #94938d;
     
   }

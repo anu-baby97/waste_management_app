@@ -1,0 +1,20 @@
+#navitem{
+    font-size: 19px;
+    font-weight: 700;
+    color:#B1E693
+   
+}
+
+#navbar{
+    background-color: blanchedalmond;
+}
+#adminnavitem{
+padding: 10px 20px;
+border:2px solid transparent
+}
+
+#adminnavitem:hover{
+    border-bottom: 2px solid whitesmoke;
+   
+
+}

@@ -24,6 +24,7 @@ var register_schema = new Schema({
         type: Date,
         default: Date.now
     }
+    //username and password not saved in register_data table and it will be saved in login_data table at the time of registration
 });
 
 var register = mongoose.model('register_data', register_schema)
